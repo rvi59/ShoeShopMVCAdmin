@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ShoeShopMVCAdmin.Models.tblSize>
+
+@{
+    ViewBag.Title = "SizeList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Size List</h2>
+
+<br />
+<p>
+    @Html.ActionLink("Add Size", "CreateSize", "Admin", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SizeNumber)
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SizeNumber)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "EditBrand", new { id = item.BrandId })*@
+                        <a href="@Url.Action("EditSize", "Admin", new { id = item.SizeId })"><i class="fas fa-edit"></i> </a>
+
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteSize", new { id = item.SizeId }, new { onclick = "return confirm('Are you sure you wish to delete this Brand ?');" })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td style="text-align:end;">No Record Found</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

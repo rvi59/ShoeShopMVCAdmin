@@ -1,0 +1,109 @@
+﻿@model IEnumerable<ShoeShopMVCAdmin.Models.tblProduct>
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Insmess"] != null || TempData["Updatemess"] != null || TempData["delProd"] != null) {
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    @TempData["Insmess"]
+    @TempData["Updatemess"]
+    @TempData["delProd"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
+
+<br />
+<h2>Product List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateProduct", "Admin", null, new { @class = "btn btn-success" })
+</p>
+<div class="insidetbl">
+    <table class="table table-hover" id="mytbll">
+        <thead>
+            <tr>
+                <th>
+                    <label>Brand</label>
+                </th>
+                <th>
+                    <label>Category</label>
+                </th>
+                <th>
+                    <label>Gender</label>
+                </th>
+                <th>
+                    <label>Size</label>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdSeelingPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdDesc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdShortName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProdQuantity)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblBrand.BrandName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblCategory.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblGender.GenderType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblSize.SizeNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdSeelingPrice)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ProdImage)" alt="Alternate Text" height="50" width="50" />
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdShortName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProdQuantity)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditProduct", new { id = item.ProdId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Delete", "DeleteProduct", new { id = item.ProdId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
